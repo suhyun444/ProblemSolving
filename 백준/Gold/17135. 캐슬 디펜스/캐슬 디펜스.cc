@@ -6,7 +6,6 @@
 using namespace std;
 
 int n, m, d;
-int maxIndex;
 int board[16][16];
 int copyBoard[16][16];
 int dirY[3] = { 0,-1,0 };
@@ -132,7 +131,6 @@ int main()
 	cin.tie(0);
 	cout.tie(0);
 	cin >> n >> m >> d;
-	maxIndex = n * m;
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
@@ -141,5 +139,4 @@ int main()
 		}
 	}
 	cout << SetArcherPosition(0, 0);
-
 }
