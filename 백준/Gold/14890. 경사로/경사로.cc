@@ -26,13 +26,9 @@ bool CheckVertical(int x)
 	{
 		if (abs(board[i][x] - board[i - 1][x]) > 1)return false;
 		if (board[i][x] > board[i - 1][x])
-		{
 			if (!CanSetRunwayVertical(x, i - l, i - 1))return false;
-		}
 		if (board[i][x] < board[i - 1][x])
-		{
 			if (!CanSetRunwayVertical(x, i, i + l - 1))return false;
-		}
 	}
 	return true;
 }
@@ -55,13 +51,9 @@ bool CheckHorizontal(int y)
 	{
 		if (abs(board[y][i] - board[y][i - 1]) > 1)return false;
 		if (board[y][i] > board[y][i-1])
-		{
 			if (!CanSetRunwayHorizontal(y, i - l, i - 1))return false;
-		}
 		if (board[y][i] < board[y][i-1])
-		{
 			if (!CanSetRunwayHorizontal(y, i, i + l - 1))return false;
-		}
 	}
 	return true;
 }
