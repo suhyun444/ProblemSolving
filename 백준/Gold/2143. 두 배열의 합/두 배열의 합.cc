@@ -1,14 +1,13 @@
 #include <iostream>
 #include <vector>
-#include <map>
 #include <algorithm>
 
 using namespace std;
 
-vector<int> arr1;
-vector<int> arr2;
-map<int,int> m1;
-map<int, int> m2;
+vector<long long> arr1;
+vector<long long> arr2;
+vector<long long> sumArr1;
+vector<long long> sumArr2;
 
 int main()
 {
@@ -35,32 +34,20 @@ int main()
 	}
 	for (int i = 0; i < n; i++)
 		for (int j = i + 1; j <= n; j++)
-		{
-			int key = arr1[j] - arr1[i];
-			if (m1.find(key) != m1.end())
-				m1[key]++;
-			else
-				m1.insert({key, 1});
-		}
+			sumArr1.push_back(arr1[j] - arr1[i]);
 
 	for (int i = 0; i < m; i++)
 		for (int j = i + 1; j <= m; j++)
-		{
-			int key = arr2[j] - arr2[i];
-			if (m2.find(key) != m2.end())
-				m2[key]++;
-			else
-				m2.insert({ key, 1 });
-		}
+			sumArr2.push_back(arr2[j] - arr2[i]);
 
 	long long result = 0;
-	for (pair<int,int> cur : m1)
+	sort(sumArr2.begin(), sumArr2.end());
+	for (int i = 0; i < sumArr1.size(); i++)
 	{
-		int key = t - cur.first;
-		if (m2.find(key) != m2.end())
-		{
-			result += 1LL * cur.second * m2[key];
-		}
+		long long findNum = t - sumArr1[i];
+		int upperIndex = upper_bound(sumArr2.begin(), sumArr2.end(), findNum) - sumArr2.begin();
+		int lowerIndex = lower_bound(sumArr2.begin(), sumArr2.end(), findNum) - sumArr2.begin();
+		result += upperIndex - lowerIndex;
 	}
 	cout << result;
 }
