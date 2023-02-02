@@ -4,10 +4,10 @@
 
 using namespace std;
 
-vector<long long> arr1;
-vector<long long> arr2;
-vector<long long> sumArr1;
-vector<long long> sumArr2;
+vector<int> arr1;
+vector<int> arr2;
+vector<int> sumArr1;
+vector<int> sumArr2;
 
 int main()
 {
@@ -44,10 +44,10 @@ int main()
 	sort(sumArr2.begin(), sumArr2.end());
 	for (int i = 0; i < sumArr1.size(); i++)
 	{
-		long long findNum = t - sumArr1[i];
+		int findNum = t - sumArr1[i];
 		int upperIndex = upper_bound(sumArr2.begin(), sumArr2.end(), findNum) - sumArr2.begin();
 		int lowerIndex = lower_bound(sumArr2.begin(), sumArr2.end(), findNum) - sumArr2.begin();
-		result += upperIndex - lowerIndex;
+		result += 1LL *upperIndex - 1LL *lowerIndex;
 	}
 	cout << result;
 }
