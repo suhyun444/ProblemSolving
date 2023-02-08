@@ -4,7 +4,6 @@
 using namespace std;
 
 char board[8][8];
-bool visited[8][8];
 int dirY[9] = { -1,-1,-1,0,1,1,1,0,0 };
 int dirX[9] = { -1,0,1,1,1,0,-1,-1,0 };
 void Bfs()
