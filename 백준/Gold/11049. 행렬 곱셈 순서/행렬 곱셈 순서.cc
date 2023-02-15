@@ -8,11 +8,10 @@ vector<pair<int, int>> mat;
 int cache[502][502];
 int Solve(int l, int r)
 {
-	if (l == r)return 0;
+	if (l == r)
+		return 0;
 	if (l + 1 == r)
-	{
 		return mat[l].first * mat[r].first * mat[r].second;
-	}
 	int& ret = cache[l][r];
 	if (ret != -1)return ret;
 	ret = 2147483646;
