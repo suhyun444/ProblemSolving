@@ -27,7 +27,7 @@ int main()
 		trees.push_back(a);
 	}
 	int result = 0;
-	int lo = 0;
+	int lo = -1;
 	int hi = maxHeight;
 	while (lo + 1 < hi)
 	{
