@@ -17,6 +17,9 @@ bool func(int mid)
 }
 int main()
 {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
 	int maxHeight = 0;
 	cin >> n >> m;
 	for (int i = 0; i < n; i++)
@@ -27,7 +30,7 @@ int main()
 		trees.push_back(a);
 	}
 	int result = 0;
-	int lo = -1;
+	int lo = 0;
 	int hi = maxHeight;
 	while (lo + 1 < hi)
 	{
@@ -43,5 +46,4 @@ int main()
 		}
 	}
 	cout << result;
-
 }
