@@ -27,10 +27,6 @@ int main()
 	cout.tie(0);
 	memset(cache, -1, sizeof(cache));
 	cin >> N >> K;
-	if (N < K * 2) {
-		cout << "0";
-		return 0;
-	}
 	int result = solve(1, 0, 1) % MOD;
 	for (int i = 1; i < N - K + 1; i++)
 	{
