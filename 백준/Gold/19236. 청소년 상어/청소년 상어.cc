@@ -16,12 +16,8 @@ struct Fish {
     int x, y;
     bool alive;
 };
-//direction 저장
 Fish fish[17];
-//cost저장
 int board[4][4];
-//direction
-//위가 1 반시계방향으로 진행
 int dirX[9] = {0, 0,-1,-1,-1,0,1,1,1 };
 int dirY[9] = {0, -1,-1,0,1,1,1,0,-1 };
 int ans = 0;
@@ -59,9 +55,6 @@ void MoveFishs(int sharkY,int sharkX)
             Fish f = fish[i];
             int nextX = dirX[f.direction] + f.x;
             int nextY = dirY[f.direction] + f.y;
-            //cout << i << " : " << f.direction << "\n";
-            //cout << "cur pos : " << f.y << " , " << f.x << " to " << nextY << " , " <<  nextX <<  "\n";
-
             if (nextX < 0 || nextX >= 4 || nextY < 0 || nextY >= 4 || (nextX == sharkX && nextY == sharkY))
             {
                 fish[i].direction++;
