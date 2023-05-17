@@ -9,8 +9,6 @@ using namespace std;
 vector<pair<int, int>> adj[40001];
 int foxDist[4001];
 int wolfDist[4001][2];
-bool foxVisited[4001];
-bool visited[4001][2];
 int main()
 {
 	ios::sync_with_stdio(false);
@@ -34,13 +32,7 @@ int main()
 	{
 		pair<int, int> cur = pq.top();
 		pq.pop();
-		while (!pq.empty() && foxVisited[cur.second])
-		{
-			cur = pq.top();
-			pq.pop();
-		}
-		if (foxVisited[cur.second]) break;
-		foxVisited[cur.second] = true;
+		if (foxDist[cur.second] < cur.first) continue;
 		for (pair<int, int> next : adj[cur.second])
 		{
 			int cost = next.second * 2;
@@ -52,7 +44,6 @@ int main()
 			}
 		}
 	}
-	memset(visited, false, sizeof(visited));
 	priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> wolfPq;
 	wolfPq.push({ 0,{1,0} });
 	wolfDist[1][0] = 0;
@@ -60,13 +51,7 @@ int main()
 	{
 		pair<int, pair<int, int>> cur = wolfPq.top();
 		wolfPq.pop();
-		while (!wolfPq.empty() && visited[cur.second.first][cur.second.second])
-		{
-			cur = wolfPq.top();
-			wolfPq.pop();
-		}
-		if (visited[cur.second.first][cur.second.second])break;
-		visited[cur.second.first][cur.second.second] = true;
+		if (wolfDist[cur.second.first][cur.second.second] < cur.first)continue;
 		for (pair<int, int> next : adj[cur.second.first])
 		{
 			int cost = (cur.second.second == 0) ? next.second : next.second * 4;
