@@ -43,6 +43,9 @@ bool isEnd()
 }
 int main()
 {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
 	memset(p, -1, sizeof(p));
 	vector<Edge> edges;
 	cin >> n >> m >> k;
@@ -65,7 +68,6 @@ int main()
 		if (isPowerPlant[Find(edges[i].u)] && isPowerPlant[Find(edges[i].v)])continue;
 		if (Merge(edges[i].u,edges[i].v))
 		{
-			//cout << "Merge : " << edges[i].u  << " , " << edges[i].v<< " \n";
 			bool flag = isPowerPlant[Find(edges[i].u)] || isPowerPlant[Find(edges[i].v)];
 			isPowerPlant[Find(edges[i].u)] = flag;
 			isPowerPlant[Find(edges[i].v)] = flag;
@@ -75,5 +77,3 @@ int main()
 	}
 	cout << result;
 }
-//부모노드는 부조건 발전소로 둘다 발전소가 아닌경우에는 아무거나 상관없음
-//이미 발전소가 연결되어 있는 경우 발전소와 연결할 필요 X
