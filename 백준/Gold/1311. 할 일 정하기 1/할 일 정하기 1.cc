@@ -5,12 +5,12 @@
 using namespace std;
 
 int N;
-int cache[20][1 << 20];
+int cache[1 << 20];
 vector<pair<int,int>> work[20];
 int solve(int n,int people)
 {
 	if (n == N)return 0;
-	int& ret = cache[n][people];
+	int& ret = cache[people];
 	if (ret != -1)return ret;
 	ret = 2e9;
 	if (work[n].size() == 0)
