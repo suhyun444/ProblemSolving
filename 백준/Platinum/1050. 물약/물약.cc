@@ -79,34 +79,31 @@ int main()
 	{
 		AddAdjustment(receipt[i].first, receipt[i].second);
 	}
-	for (int i = 0; i < m; ++i)
+	for (int j = 0; j < index; ++j)
 	{
-		for (int j = 0; j < m; ++j)
+		for (int k = 0; k < index; k++)
 		{
-			for (int k = 0; k < index; k++)
+			int reciptIndex = 0;
+			while (!adj[k][reciptIndex].empty())
 			{
-				int reciptIndex = 0;
-				while (!adj[k][reciptIndex].empty())
+				bool canMake = true;
+				long long value = 0;
+				for (pair<int, int> next : adj[k][reciptIndex])
 				{
-					bool canMake = true;
-					long long value = 0;
-					for (pair<int, int> next : adj[k][reciptIndex])
+					if (next.second == -1 || cost[next.second] == 2e10)
 					{
-						if (next.second == -1 || cost[next.second] == 2e10)
-						{
-							canMake = false;
-							break;
-						}
-						else
-						{
-							value += next.first * cost[next.second];
-							value = min(value, (long long)1e9 + 1);
-						}
+						canMake = false;
+						break;
 					}
-					if(canMake)
-						cost[k] = min(cost[k], value);
-					++reciptIndex;
+					else
+					{
+						value += next.first * cost[next.second];
+						value = min(value, (long long)1e9 + 1);
+					}
 				}
+				if (canMake)
+					cost[k] = min(cost[k], value);
+				++reciptIndex;
 			}
 		}
 	}
