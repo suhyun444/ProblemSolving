@@ -4,11 +4,9 @@
 #include <map>
 
 using namespace std;
-vector<pair<int, int>> adj[1001][1001];
+vector<pair<int, int>> adj[101][101];
 map<string, int> nameToIndex;
-bool visited[1001];
-long long cost[1001];
-bool calculated[1001];
+long long cost[101];
 void AddAdjustment(int from, string toString)
 {
 	int adjIndex = 0;
@@ -30,57 +28,12 @@ void AddAdjustment(int from, string toString)
 			adj[from][adjIndex].push_back({ num,nameToIndex[name] });
 	}
 }
-long long Dfs(int cur)
-{
-	if (visited[cur])return -1;
-	if (calculated[cur])return cost[cur];
-	visited[cur] = true;
-	long long result = 9e18;
-	int index = 0;
-	while (!adj[cur][index].empty())
-	{
-		long long curCost = 0;
-		for (pair<int, int> next : adj[cur][index])
-		{
-			if (next.second == -1)
-			{
-				curCost = 0;
-				break;
-			}
-			long long value = Dfs(next.second);
-			if (value == -1 && cost[next.second] == 0)
-			{
-				curCost = 0;
-				break;
-			}
-			else if (value == -1 && cost[next.second] != 0)
-				value = cost[next.second];
-			else if (value != -1 && cost[next.second] != 0)
-				value = min(value, cost[next.second]);
-			curCost += next.first * value;
-			curCost = min(curCost, (long long)1e9 + 1);
-		}
-		if (curCost > 0)
-		{
-			result = min(curCost, result);
-		}
-		++index;
-	}
-	visited[cur] = false;
-	if (result == 9e18)return -1;
-	calculated[cur] = true;
-	if (cost[cur] != 0)
-		cost[cur] = min(result, cost[cur]);
-	else
-		cost[cur] = result;
-	return result;
-}
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 	cout.tie(0);
-	for (int i = 0; i < 1001; ++i)cost[i] = 2e10;
+	for (int i = 0; i < 101; ++i)cost[i] = 2e10;
 	int index = 0;
 	int n, m;
 	cin >> n >> m;
@@ -126,18 +79,6 @@ int main()
 	{
 		AddAdjustment(receipt[i].first, receipt[i].second);
 	}
-	//long long ans = Dfs(nameToIndex["LOVE"]);
-	//if (ans == -1 && cost[nameToIndex["LOVE"]] != 0)
-	//	ans = cost[nameToIndex["LOVE"]];
-	//else if (cost[nameToIndex["LOVE"]] != 0)
-	//	ans = min(ans, cost[nameToIndex["LOVE"]]);
-	//if (ans < 0)
-	//	cout << "-1";
-	//else
-	//{
-	//	ans = min(ans, (long long)1e9 + 1);
-	//	cout << ans;
-	//}
 	for (int i = 0; i < m; ++i)
 	{
 		for (int j = 0; j < m; ++j)
