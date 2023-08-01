@@ -79,16 +79,16 @@ int main()
 	{
 		AddAdjustment(receipt[i].first, receipt[i].second);
 	}
-	for (int j = 0; j < index; ++j)
+	for (int i = 0; i < 101; ++i)
 	{
-		for (int k = 0; k < index; k++)
+		for (int j = 0; j < index; ++j)
 		{
 			int reciptIndex = 0;
-			while (!adj[k][reciptIndex].empty())
+			while (!adj[j][reciptIndex].empty())
 			{
 				bool canMake = true;
 				long long value = 0;
-				for (pair<int, int> next : adj[k][reciptIndex])
+				for (pair<int, int> next : adj[j][reciptIndex])
 				{
 					if (next.second == -1 || cost[next.second] == 2e10)
 					{
@@ -102,18 +102,14 @@ int main()
 					}
 				}
 				if (canMake)
-					cost[k] = min(cost[k], value);
+					cost[j] = min(cost[j], value);
 				++reciptIndex;
 			}
 		}
 	}
 	int loveIndex = nameToIndex["LOVE"];
 	if (cost[loveIndex] == 2e10)
-	{
 		cout << "-1";
-	}
 	else
-	{
 		cout << cost[loveIndex];
-	}
 }
