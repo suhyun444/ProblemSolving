@@ -1,46 +1,36 @@
 #include <iostream>
-#include <map>
+#include <algorithm>
 #include <vector>
 
 using namespace std;
 
 int mid;
 int n, s;
-map<int, long long> m;
+vector<int> resultArr;
 vector<int> arr;
-void left(int index, int num,bool flag)
+void leftArr(int index, int num,bool flag)
 {
 	if (index == mid)
 	{
 		if (!flag)return;
-		if (m.find(num) == m.end())
-		{
-			m.insert({ num, 1 });
-		}
-		else
-		{
-			++m[num];
-		}
+		resultArr.push_back(num);
 		return;
 	}
-	left(index + 1, num, flag & true);
-	left(index + 1, num + arr[index],true);
+	leftArr(index + 1, num, flag & true);
+	leftArr(index + 1, num + arr[index],true);
 }
 long long Right(int index, int num,bool flag)
 {
 	if (index == n)
 	{
 		int need = s - num;
-		if (m.find(need) == m.end())
-		{
-			if (need == 0)return flag;
-			return 0;
-		}
-		if (s == num)return m[need] + flag;
-		return m[need];
+		int s = lower_bound(resultArr.begin(), resultArr.end(), need) - resultArr.begin();
+		int e = upper_bound(resultArr.begin(), resultArr.end(), need) - resultArr.begin();
+		if (need == 0)return e - s + flag;
+		return e - s;
 	}
 	return Right(index + 1, num,flag & true) + Right(index + 1, num + arr[index],true);
-}
+}	
 int main()
 {
 	ios::sync_with_stdio(false);
@@ -53,6 +43,7 @@ int main()
 		cin >> arr[i];
 	}
 	mid = n / 2;
-	left(0, 0,false);
+	leftArr(0, 0,false);
+	sort(resultArr.begin(), resultArr.end());
 	cout << Right(mid, 0,false);	
 }
