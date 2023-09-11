@@ -32,14 +32,11 @@ int main()
 	}
 	sort(arr.begin(), arr.end());
 	long long result = 0;
-	for (int i = 0; i < n - 1; ++i)
+	for (int i = 0; i < n; ++i)
 	{
-		for (int j = i + 1; j < n; ++j)
-		{
-			long long mul = max(0, (j - i - 1));
-			result += (arr[j] - arr[i]) * power(2,mul);
-			result %= 1000000007;
-		}
+		result += arr[i] * power(2, i);
+		result -= arr[i] * power(2, n - i - 1);
+		result %= 1000000007;
 	}
 	cout << result;
 }
