@@ -29,14 +29,11 @@ long long CCW(const Point& p1, const Point& p2, const Point& p3)
 }
 bool CompareAngle(const Point& p1, const Point& p2)
 {
-	long long res = CCW(p[0], p1, p2);
-	if (res == 0) {
-		if (p1.y - p[0].y == p2.y - p[0].y) return p1.x - p[0].x < p2.x - p[0].x;
-		else return p1.y - p[0].y < p2.y - p[0].y;
-	}
-	else {
-		return res > 0;
-	}
+	long long ccw = CCW(p[0], p1, p2);
+	if (ccw)
+		return ccw > 0;
+	if (p1.y == p2.y)return p1.x < p2.x;
+	return p1.y < p2.y;
 }
 int main()
 {
