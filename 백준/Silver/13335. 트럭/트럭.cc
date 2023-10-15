@@ -14,21 +14,18 @@ int main()
 		cin >> arr[i];
 	}
 	int time = 0, result = 0, index = 0,weight = 0;
-	queue<pair<int,int>> q;
+	queue<int> q;
 	while (result < n)
 	{
-		if (!q.empty() && time - q.front().first >= w)
+		if (!q.empty() && time - q.front() >= w)
 		{
-			pair<int,int> t = q.front();
 			q.pop();
-			weight -= t.second;
-			++result;
+			weight -= arr[result++];
 		}
 		if (index < n && weight + arr[index] <= l)
 		{
 			weight += arr[index];
-			pair<int, int>t = { time,arr[index] };
-			q.push(t);
+			q.push(time);
 			++index;
 		}
 		++time;
