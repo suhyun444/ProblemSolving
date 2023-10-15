@@ -4,10 +4,6 @@
 
 using namespace std;
 
-struct Truck
-{
-	int time, weight;
-};
 int main()
 {
 	int n, w, l;
@@ -18,22 +14,20 @@ int main()
 		cin >> arr[i];
 	}
 	int time = 0, result = 0, index = 0,weight = 0;
-	queue<Truck> q;
+	queue<pair<int,int>> q;
 	while (result < n)
 	{
-		if (!q.empty() && time - q.front().time >= w)
+		if (!q.empty() && time - q.front().first >= w)
 		{
-			Truck t = q.front();
+			pair<int,int> t = q.front();
 			q.pop();
-			weight -= t.weight;
+			weight -= t.second;
 			++result;
 		}
 		if (index < n && weight + arr[index] <= l)
 		{
 			weight += arr[index];
-			Truck t;
-			t.weight = arr[index];
-			t.time = time;
+			pair<int, int>t = { time,arr[index] };
 			q.push(t);
 			++index;
 		}
