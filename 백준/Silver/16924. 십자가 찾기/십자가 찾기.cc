@@ -8,6 +8,36 @@ bool visited[101][101];
 char board[101][101];
 int dirY[4] = { 0,1,0,-1 };
 int dirX[4] = { 1,0,-1,0 };
+int Calc(int y, int x)
+{
+	int size = 1;
+	while (true)
+	{
+		bool canMake = true;
+		for (int k = 0; k < 4; ++k)
+		{
+			int nextY = y + dirY[k] * size;
+			int nextX = x + dirX[k] * size;
+			if (nextY < 0 || nextY >= n || nextX < 0 || nextX >= m || board[nextY][nextX] == '.')
+			{
+				canMake = false;
+				break;
+			}
+		}
+		if (!canMake)
+		{
+			break;
+		}
+		for (int k = 0; k < 4; ++k)
+		{
+			int nextY = y + dirY[k] * size;
+			int nextX = x + dirX[k] * size;
+			visited[nextY][nextX] = true;
+		}
+		++size;
+	}
+	return size - 1;
+}
 int main()
 {
 	ios::sync_with_stdio(false);
@@ -28,36 +58,11 @@ int main()
 		{
 			if (board[i][j] == '*')
 			{
-				int size = 1;
-				while (true)
-				{
-					bool canMake = true;
-					for (int k = 0; k < 4; ++k)
-					{
-						int nextY = i + dirY[k] * size;
-						int nextX = j + dirX[k] * size;
-						if (nextY < 0 || nextY >= n || nextX < 0 || nextX >= m || board[nextY][nextX] == '.')
-						{
-							canMake = false;
-							break;
-						}
-					}
-					if (!canMake)
-					{
-						break;
-					}
-					for (int k = 0; k < 4; ++k)
-					{
-						int nextY = i + dirY[k] * size;
-						int nextX = j + dirX[k] * size;
-						visited[nextY][nextX] = true;
-					}
-					++size;
-				}
-				if (size != 1)
+				int size = Calc(i, j);
+				if (size != 0)
 				{
 					visited[i][j] = true;
-					result.push_back({ {i + 1,j + 1},size-1 });
+					result.push_back({ {i + 1,j + 1},size });
 				}
 			}
 		}
