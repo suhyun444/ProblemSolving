@@ -1,20 +1,28 @@
-#include <cstdio>
-#include <deque>
+#include <algorithm>
+#include <queue>
+#include <iostream>
 
 using namespace std;
 
-int main() {
-	deque<int> dq;
-	int n;
-	scanf("%d", &n);
-	for (int i = 0;i < n;i++) {
-		dq.push_back(i + 1);
-	}
-	while (dq.size() != 1) {
-		dq.pop_front();
-		int n = dq.at(0);
-		dq.push_back(n);
-		dq.pop_front();
-	}
-	printf("%d", dq.at(0));
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    queue<int> q;
+    cin >> n;
+    for (int i = 1; i <= n; ++i)
+    {
+        q.push(i);
+    }
+    while (q.size() > 1)
+    {
+        q.pop();
+        int temp = q.front();
+        q.pop();
+        q.push(temp);
+    }
+    cout << q.front();
 }
