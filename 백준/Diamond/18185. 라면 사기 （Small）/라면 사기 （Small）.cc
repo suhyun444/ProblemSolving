@@ -30,11 +30,12 @@ int main()
 		arr[i + 1] -= first;
 		arr[i + 2] -= first;
 		result += 7 * first;
+
 		int second = min(arr[i], arr[i + 1]);
-		int gap = arr[i + 1] - arr[i + 2];
 		arr[i] -= second;
 		arr[i + 1] -= second;
 		result += 5 * second;
+
 		result += 3 * arr[i];
 		arr[i] = 0;
 	}
