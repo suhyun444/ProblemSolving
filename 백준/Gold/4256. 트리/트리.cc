@@ -8,44 +8,21 @@ using namespace std;
 
 int n;
 int cur = 0;
-struct Tree
-{
-    Tree()
-    {
-        left = nullptr;
-        right = nullptr;
-        item = 0;
-    }
-    Tree* left;
-    Tree* right;
-    int item;
-};
-
-Tree* t;
 vector<int> pre;
 vector<int> in;
-Tree* initTree(int l,int r)
+void initTree(int l,int r)
 {
-    if(l == r) return nullptr;
-    Tree* tree = new Tree();
-    tree->item = pre[cur++];
+    if(l == r) return;
+    int current = pre[cur++];
     for(int i=l;i<r;++i)
     {
-        if(in[i] == tree->item)
+        if(in[i] == current)
         {
-            tree->left = initTree(l,i);
-            tree->right = initTree(i + 1,r);
+            initTree(l,i);
+            initTree(i + 1,r);
         }
     }
-    return tree;
-}
-void postorder(Tree* tree)
-{
-    if(tree->left != nullptr)
-        postorder(tree->left);
-    if(tree->right != nullptr)
-        postorder(tree->right);
-    cout << tree->item << " ";
+    cout << current<<" ";
 }
 int main()
 {
@@ -68,8 +45,7 @@ int main()
             cin >> item;
             in.push_back(item);
         }
-        Tree* root = initTree(0,n);
-        postorder(root);
+        initTree(0,n);
         cout << "\n";
         cur = 0;
         pre.clear();
