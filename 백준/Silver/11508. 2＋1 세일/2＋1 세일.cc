@@ -7,8 +7,8 @@
 using namespace std;
 
 
-vector<long long> arr;
-bool compare(long long a,long long b)
+vector<int> arr;
+bool compare(int a,int b)
 {
     return a > b;
 }
@@ -25,7 +25,7 @@ int main()
         cin >> arr[i];
     }
     sort(arr.begin(),arr.end(),compare);
-    long long sum = 0;
+    int sum = 0;
     for(int i=0;i<n;++i)
     {
         if((i + 1) % 3 != 0)
