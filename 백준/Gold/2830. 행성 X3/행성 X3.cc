@@ -28,13 +28,13 @@ int main()
         long long one = 0;
         for(int j=0;j<n;++j)
         {
-            if((arr[j] >> i)&1)
+            if((arr[j] >> i)&1 == 1)
             {
                 one++;
             }
         }
         long long zero = n - one;
-        ret += zero * one * (1LL << i);
+        ret += 1LL * zero * one * (long long)pow(2,i);
     }
     cout << ret;
 }
