@@ -28,5 +28,5 @@ int main()
     cache[4] = 5;
     for(int i=5;i<=n;++i)
         cache[i] = cache[i - 2] + cache[i - 4] + cache[i - 4];
-    cout << result - (result - cache[n]) / 2;
+    cout << (result + cache[n]) / 2;
 }
