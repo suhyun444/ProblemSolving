@@ -48,19 +48,18 @@ int main()
     sort(beer.begin(),beer.end(),compare);
     long long lo = 0;
     long long hi = maxLevel + 1;
-    int ans = -1;
-    while(lo <= hi)
+    while(lo + 1 < hi)
     {
         long long mid = (lo + hi) / 2;
         if(func(mid))
         {
-            hi = mid - 1;
-            ans = mid;
+            hi = mid;
         }
         else
         {
-            lo = mid + 1;
+            lo = mid;
         }
     }
-    cout << ans;
+    if(hi == maxLevel + 1)cout << "-1";
+    else cout << hi;
 }
