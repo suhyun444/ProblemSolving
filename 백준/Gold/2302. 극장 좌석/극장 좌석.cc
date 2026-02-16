@@ -22,13 +22,10 @@ int solve(int cur)
     if(ret != -1)
         return ret;
 
-    if(vip[cur])
-        ret = solve(cur + 1);
-    else if(!vip[cur + 1])
-        ret = solve(cur + 1) + solve(cur + 2);
-    else
-        ret = solve(cur + 1);
-        
+    ret = solve(cur + 1);
+     if(!vip[cur] && !vip[cur + 1])
+        ret += solve(cur + 2);
+
     return ret;
 }
 int main()
