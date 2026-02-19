@@ -1,0 +1,1 @@
+select c.id as ID from ecoli_data as c inner join ecoli_data as p on c.parent_id = p.id inner join ecoli_data as gp on p.parent_id = gp.id where gp.parent_id is NULL order by c.id;
