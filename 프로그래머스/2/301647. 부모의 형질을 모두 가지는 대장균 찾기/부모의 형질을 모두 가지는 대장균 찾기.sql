@@ -1,0 +1,1 @@
+select c.id as ID,c.genotype as GENOTYPE,p.genotype as PARENT_GENOTYPE from ecoli_data as c left join ecoli_data as p on p.id = c.PARENT_ID where p.genotype & c.genotype = p.genotype order by c.id asc;
