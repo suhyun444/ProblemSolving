@@ -8,11 +8,6 @@
 
 using namespace std;
 
-int n,k;
-int board[201][201];
-int dirY[4] = {0,1,0,-1};
-int dirX[4] = {1,0,-1,0};
-int s,x,y;
 int main()
 {
     ios::sync_with_stdio(false);
@@ -39,7 +34,7 @@ int main()
             {
                 int sy = cur.first;
                 int sx = cur.second - offset;
-                if(sy + row > n + 1 || sx + col > n + 1 || sx < 1 || sy < 1)continue;
+                if(sy + row > n + 1  || sx + col > n  || sx < 1 || sy < 1)continue;
                 int count = 0;
                 for(int k=0;k<fish.size();++k)
                 {
