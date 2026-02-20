@@ -1,0 +1,1 @@
+select DISTINCT ID, EMAIL, FIRST_NAME, LAST_NAME from developers as d, skillcodes as s where (s.NAME = "Python" and d.skill_code & s.code = s.code) or (s.name = "C#" and d.skill_code & s.code = s.code) order by id;
