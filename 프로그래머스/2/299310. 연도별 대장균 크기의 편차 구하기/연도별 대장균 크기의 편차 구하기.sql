@@ -1,0 +1,1 @@
+select year(c.DIFFERENTIATION_DATE) as YEAR, (p.max_colony - c.size_of_colony) as YEAR_DEV, c.id from ecoli_data as c inner join (select max(size_of_colony) as max_colony, year(DIFFERENTIATION_DATE) as now from ecoli_data group by year(DIFFERENTIATION_DATE)) as p on year(c.DIFFERENTIATION_DATE) = p.now order by YEAR, YEAR_DEV;
