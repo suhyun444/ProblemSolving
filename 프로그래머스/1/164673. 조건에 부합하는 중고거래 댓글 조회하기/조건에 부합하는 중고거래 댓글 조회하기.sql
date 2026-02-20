@@ -1,0 +1,1 @@
+select b.title as TITLE, b.board_id as BOARD_ID, r.reply_id as REPLY_ID, r.WRITER_ID as WRITER_ID, r.contents as CONTENTS, DATE_FORMAT(r.created_date,"%Y-%m-%d") as CREATED_DATE from used_goods_board as b inner join used_goods_reply as r on b.board_id = r.board_id where b.created_date like "2022-10%" order by r.created_date,b.title;
