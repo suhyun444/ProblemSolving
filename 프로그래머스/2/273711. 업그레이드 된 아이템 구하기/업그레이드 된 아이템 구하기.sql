@@ -1,0 +1,1 @@
+select ci.ITEM_ID,ci.ITEM_NAME,ci.RARITY from (item_tree as pt inner join item_info as pi on pt.item_id = pi.item_id) inner join (item_tree as ct inner join item_info as ci on ct.item_id = ci.item_id) on pt.item_id = ct.parent_item_id where pi.rarity = "RARE" order by item_id desc;
