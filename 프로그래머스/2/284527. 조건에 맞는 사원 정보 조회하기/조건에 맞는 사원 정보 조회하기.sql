@@ -1,0 +1,1 @@
+select sum(g.SCORE) over(partition by g.emp_no) as SCORE, g.EMP_NO, e.EMP_NAME, e.POSITION, e.EMAIL from hr_employees as e inner join hr_grade as g on e.emp_no = g.emp_no order by SCORE desc limit 1;
