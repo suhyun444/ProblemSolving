@@ -1,0 +1,1 @@
+select substring(product_code,1,2) as CATEGORY, count(*) as PRODUCTS from product group by CATEGORY;
