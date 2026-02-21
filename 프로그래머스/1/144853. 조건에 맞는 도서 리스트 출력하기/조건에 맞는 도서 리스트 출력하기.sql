@@ -1,0 +1,1 @@
+select BOOK_ID, date_format(PUBLISHED_DATE,"%Y-%m-%d") from book where published_date >= "2021-01-01" and published_date < "2022-01-01" and category = "인문" order by book_id desc;
