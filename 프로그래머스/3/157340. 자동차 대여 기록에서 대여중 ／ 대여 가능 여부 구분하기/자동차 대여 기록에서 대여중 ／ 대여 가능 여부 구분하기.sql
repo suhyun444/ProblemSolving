@@ -1,0 +1,1 @@
+select distinct h.CAR_ID, (case when e.car_id is null then "대여 가능" else "대여중" end) as AVAILABILITY from car_rental_company_rental_history as h left join (select car_id from car_rental_company_rental_history where "2022-10-16" between start_date and end_date) as e on h.car_id = e.car_id order by h.car_id desc;
