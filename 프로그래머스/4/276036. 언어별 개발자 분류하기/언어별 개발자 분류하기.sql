@@ -1,0 +1,3 @@
+select (case when (skill_code & python.code > 0 and skill_code & front.sumCode > 0) then "A" when (skill_code & c.code > 0) then "B" when (skill_code & front.sumCode > 0) then "C" else null end) as GRADE, ID,EMAIL
+        from developers as d, (select code from skillcodes where NAME = "Python") as python, (select sum(code) as sumCode from skillcodes where category = "Front End") as front, (select code from skillcodes where NAME = "C#") as c
+        where (skill_code & python.code > 0 and skill_code & front.sumCode > 0) or (skill_code & c.code > 0) or (skill_code & front.sumCode > 0) order by GRADE,ID;
