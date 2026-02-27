@@ -30,14 +30,8 @@ int main()
         {
             int x,y,r;
             cin >> x >> y >> r;
-            if(dist(x,y,ex,ey) < r && dist(x,y,sx,sy) >= r)
-            {
+            if((dist(x,y,ex,ey) < r && dist(x,y,sx,sy) >= r) || (dist(x,y,ex,ey) >= r && dist(x,y,sx,sy) < r))
                 ans++;       
-            }
-            else if(dist(x,y,ex,ey) >= r && dist(x,y,sx,sy) < r)
-            {
-                ans++;
-            }
         }
         cout << ans<<"\n";
     }
