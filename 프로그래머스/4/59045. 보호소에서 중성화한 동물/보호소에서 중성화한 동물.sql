@@ -1,0 +1,1 @@
+select ANIMAL_ID,ANIMAL_TYPE,NAME from ANIMAL_OUTS where animal_id in (select animal_id from animal_ins where sex_upon_intake not like "Spayed%" and sex_upon_intake not like "Neutered%") and animal_id in (select animal_id from animal_outs where sex_upon_outcome like "Spayed%" or sex_upon_outcome like "Neutered%") order by ANIMAL_ID;
