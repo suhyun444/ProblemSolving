@@ -1,66 +1,67 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+#include <queue>
+#include <map>
+#include <stack>
 
 using namespace std;
 
+
 int arr[100001];
-int tree[300003];
-void InitTree(int l, int r, int node)
+int tree[300001];
+int initTree(int n,int l,int r)
 {
-	if (l == r)
-	{
-		tree[node] = arr[l];
-		return;
-	}
-	int mid = (l + r) / 2;
-	InitTree(l, mid, node * 2);
-	InitTree(mid + 1, r, node * 2 + 1);
-	tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+    if(l==r)
+    {
+       return tree[n] = arr[l];
+    }
+    int mid = (l + r) / 2;
+    return tree[n] = min(initTree(n*2,l,mid),initTree(n*2+1,mid + 1,r)); 
 }
-void Update(int l, int r, int node, int index, int value)
+int query(int n,int l,int r,int nodeL,int nodeR)
 {
-	if (l > index || index > r)return;
-	if (l == r)
-	{
-		tree[node] = value;
-		return;
-	}
-	int mid = (l + r) / 2;
-	Update(l, mid, node * 2, index, value);
-	Update(mid + 1, r, node * 2 + 1, index, value);
-	tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+    if(r < nodeL || nodeR < l) return 2e9;
+    if(nodeL <= l && r <= nodeR) return tree[n];
+    int mid = (l+r) / 2;
+    return min(query(n*2,l,mid,nodeL,nodeR),query(n*2+1,mid+1,r,nodeL,nodeR));
 }
-int Query(int l, int r, int node, int nodeL, int nodeR)
+int update(int n,int l,int r,int index)
 {
-	if (l > nodeR || nodeL > r)return 2e9;
-	if (nodeL <= l && r <= nodeR)return tree[node];
-	int mid = (l + r) / 2;
-	return min(Query(l, mid, node * 2, nodeL, nodeR), Query(mid + 1, r, node * 2 + 1, nodeL, nodeR));
+    if(r < index || l > index)return tree[n];
+    if(l == r)
+        return tree[n] = arr[l];
+    int mid = (l + r) / 2;
+    return tree[n] = min(update(n*2,l,mid,index),update(n*2+1,mid + 1,r,index)); 
 }
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-	int n;
-	cin >> n;
-	for (int i = 1; i <= n; ++i)
-	{
-		cin >> arr[i];
-	}
-	InitTree(1,n,1);
-	int m;
-	cin >> m;
-	for (int i = 0; i < m; ++i)
-	{
-		int a, b, c;
-		cin >> a >> b >> c;
-		if (a == 1)
-		{
-			Update(1, n, 1, b, c);
-		}
-		else
-		{
-			cout << Query(1, n, 1, b, c) << "\n";
-		}
-	}
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin >> n;
+    for(int i=1;i<=n;++i)
+    {
+        cin >> arr[i];
+    }
+    initTree(1,1,n);
+    int m;
+    cin >> m;
+    for(int i=0;i<m;++i)
+    {
+        int a,b,c;
+        cin >> a >> b >> c;
+        if(a == 1)
+        {
+            arr[b] = c;
+            update(1,1,n,b);
+        }
+        else
+        {
+            cout << query(1,1,n,b,c) << "\n";
+        }
+    }
 }
